@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .end {
+            display: none;
+        }
+
+        .start {
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid white;
+            border-radius: 20px;
+            height: 500px;
+            margin-top: 40px;
+            display: none;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .question {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            display: block;
+        }
+
+        .startbtn {
+            background-color: black;
+            border: solid white 2px;
+            border-radius: 50%;
+            color: white;
+            padding: 20px;
+            margin-right: 40px;
+        }
+
+        .startbtn:hover {
+            background-color: white;
+            color: black;
+            padding: 30px;
+        }
+
+        .bye {
+            position: absolute;
+            top: 40%;
+            font-size: 80px;
+            left: 200px;
+        }
+
+        h2 {
+            color: white;
+            border: 2px solid white;
+            border-radius: 20px;
+            width: 200px;
+            text-align: center;
+            padding: 10px
+        }
+
+        .answer {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .answer:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .quiz {
+            margin-bottom: 40px;
+            font-size: 40px;
+        }
+
+        .next {
+            color: white;
+            border: 2px solid white;
+            border-radius: 20px;
+            width: 200px;
+            text-align: center;
+            padding: 20px;
+            background-color: black;
+            float: right;
+            margin-top: 20px;
+            margin-right: 5px;
+            font-size: 20px;
+        }
+
+        .next:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="question">
+        <h1>Do you want to play ?</h1>
+        <button onclick="start()" class="startbtn">Yes</button>
+        <button onclick="end()" class="startbtn">No</button>
+    </div>
+    <div class="end">
+        <h1 class="bye">Then bye</h1>
+    </div>
+    <div class="start">
+        <h1 class="quiz">Question</h1>
+        <h2 class="answer">answer 1</h2>
+        <h2 class="answer">answer 2</h2>
+        <h2 class="answer">answer 3</h2>
+        <h2 class="answer">answer 4</h2>
+        <h2 class="state">State</h2>
+        <button class="next" onclick="next()">Next question</button>
+
+    </div>
+    <script>
+        question = document.getElementsByClassName("question")[0];
+        startpage = document.getElementsByClassName("start")[0];
+        endpage = document.getElementsByClassName("end")[0]
+        state = document.getElementsByClassName("state")[0];
+        questions = [{ question: "what is 1+1 ?", answer1: "1", answer2: "2", answer3: "3", answer4: "4", correct: "2" },
+        { question: "what is 2+2 ?", answer1: "4", answer2: "3", answer3: "2", answer4: "1", correct: "4" }
+        ];
+        quiz = document.getElementsByClassName("quiz")[0];
+        answer = document.getElementsByClassName("answer");
+
+        i = 0;
+
+        function start() {
+            question.style.display = "none";
+            startpage.style.display = "block";
+            quiz.innerHTML = questions[i].question;
+            answer[0].innerHTML = questions[i].answer1;
+            answer[1].innerHTML = questions[i].answer2;
+            answer[2].innerHTML = questions[i].answer3;
+            answer[3].innerHTML = questions[i].answer4;
+
+        }
+        function end() {
+            question.style.display = "none";
+            endpage.style.display = "block";
+        }
+
+        function next() {
+            i++;
+            start()
+        }
+
+        for (j = 0; j < 4; j++) {
+            answer[j].addEventListener("click", function () {
+                if (this.innerHTML == questions[i].correct) {
+                    state.innerHTML = "Correct";
+                    state.style.backgroundColor = "green";
+                }
+                else {
+                    state.innerHTML = "Wrong";
+                    state.style.backgroundColor = "red";
+                }
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>
