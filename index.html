@@ -117,6 +117,10 @@
             top: 200px;
             right: 50px;
         }
+
+        .finish {
+            display: none;
+        }
     </style>
 </head>
 
@@ -141,6 +145,9 @@
     <div class="score">
         <h1 class="scoretext">Your score</h1>
     </div>
+    <div class="finish">
+        <h1>Your score is</h1>
+    </div>
     <script>
         scorecount = 0;
         score = document.getElementsByClassName("score")[0];
@@ -149,8 +156,14 @@
         startpage = document.getElementsByClassName("start")[0];
         endpage = document.getElementsByClassName("end")[0]
         state = document.getElementsByClassName("state")[0];
+        nexbtn = document.getElementsByClassName("next")[0];
+        finish = document.getElementsByClassName("finish")[0];
         questions = [{ question: "what is 1+1 ?", answer1: "1", answer2: "2", answer3: "3", answer4: "4", correct: "2" },
-        { question: "what is 2+2 ?", answer1: "4", answer2: "3", answer3: "2", answer4: "1", correct: "4" }
+        { question: "what is 2+2 ?", answer1: "4", answer2: "3", answer3: "2", answer4: "1", correct: "4" },
+        { question: "what is 3+3 ?", answer1: "4", answer2: "3", answer3: "2", answer4: "6", correct: "6" },
+        { question: "what is 4+4 ?", answer1: "4", answer2: "3", answer3: "8", answer4: "1", correct: "8" },
+        { question: "what is 5+5 ?", answer1: "4", answer2: "10", answer3: "2", answer4: "1", correct: "10" },
+        { question: "what is 6+6 ?", answer1: "12", answer2: "3", answer3: "2", answer4: "1", correct: "12" },
         ];
         quiz = document.getElementsByClassName("quiz")[0];
         answer = document.getElementsByClassName("answer");
@@ -167,7 +180,21 @@
             answer[2].innerHTML = questions[i].answer3;
             answer[3].innerHTML = questions[i].answer4;
 
+            if (i == 5) {
+                nexbtn.innerHTML = "End";
+                nexbtn.setAttribute('onclick', "finish()")
+
+            }
+
         }
+
+        function finish() {
+            startpage.style.display = "none";
+            score.style.display = "none";
+            finish.children[0].innerHTML = "Your score is " + scorecount;
+            finish.style.display = "block";
+        }
+
         function end() {
             question.style.display = "none";
             endpage.style.display = "block";
